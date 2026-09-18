@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>JHI Digital Mart</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f5f7fb;
+            color: #222;
+        }
+
+        header {
+            background: #111827;
+            color: white;
+            padding: 18px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .logo span {
+            color: #22c55e;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 15px;
+            font-size: 14px;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #111827, #1d4ed8);
+            color: white;
+            text-align: center;
+            padding: 70px 20px;
+        }
+
+        .hero h1 {
+            font-size: 40px;
+            margin-bottom: 15px;
+        }
+
+        .hero p {
+            max-width: 650px;
+            margin: auto;
+            line-height: 1.6;
+            color: #e5e7eb;
+        }
+
+        .search {
+            margin: 25px auto 0;
+            max-width: 600px;
+            display: flex;
+        }
+
+        .search input {
+            flex: 1;
+            padding: 15px;
+            border: none;
+            border-radius: 8px 0 0 8px;
+            font-size: 16px;
+        }
+
+        .search button {
+            padding: 15px 20px;
+            border: none;
+            background: #22c55e;
+            color: white;
+            border-radius: 0 8px 8px 0;
+            cursor: pointer;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1100px;
+            margin: 40px auto;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 15px;
+        }
+
+        .category {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+            cursor: pointer;
+        }
+
+        .category:hover {
+            transform: translateY(-3px);
+        }
+
+        .products {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 20px;
+        }
+
+        .product {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.08);
+        }
+
+        .product-image {
+            height: 150px;
+            background: #e5e7eb;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 45px;
+        }
+
+        .product-info {
+            padding: 18px;
+        }
+
+        .product-info h3 {
+            margin-bottom: 8px;
+        }
+
+        .product-info p {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 12px;
+        }
+
+        .price {
+            font-weight: bold;
+            color: #1d4ed8;
+            margin-bottom: 12px;
+        }
+
+        .btn {
+            display: inline-block;
+            background: #1d4ed8;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 6px;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .sell-section {
+            background: white;
+            padding: 40px 20px;
+            text-align: center;
+            border-radius: 12px;
+            margin-top: 50px;
+        }
+
+        .sell-section p {
+            margin: 12px auto 20px;
+            max-width: 600px;
+            color: #666;
+        }
+
+        footer {
+            background: #111827;
+            color: white;
+            text-align: center;
+            padding: 30px 15px;
+            margin-top: 50px;
+        }
+
+        footer p {
+            margin: 8px;
+            color: #d1d5db;
+        }
+
+        @media (max-width: 600px) {
+            .hero h1 {
+                font-size: 30px;
+            }
+
+            header {
+                justify-content: center;
+            }
+
+            nav a {
+                margin: 5px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">JHI <span>Digital Mart</span></div>
+
+    <nav>
+        <a href="#">Home</a>
+        <a href="#products">Products</a>
+        <a href="#sell">Sell</a>
+        <a href="#">Login</a>
+    </nav>
+</header>
+
+<section class="hero">
+
+    <h1>Welcome to JHI Digital Mart</h1>
+
+    <p>
+        Discover, buy and sell digital products online.
+        Ebooks, courses, templates, graphics, software and more.
+    </p>
+
+    <div class="search">
+        <input
+            type="text"
+            id="searchInput"
+            placeholder="Search digital products..."
+            onkeyup="searchProducts()"
+        >
+
+        <button onclick="searchProducts()">Search</button>
+    </div>
+
+</section>
+
+<section class="container">
+
+    <h2 class="section-title">Browse Categories</h2>
+
+    <div class="categories">
+
+        <div class="category">📚 Ebooks</div>
+        <div class="category">🎓 Courses</div>
+        <div class="category">🎨 Graphics</div>
+        <div class="category">📄 Templates</div>
+        <div class="category">💻 Software</div>
+        <div class="category">📈 Business</div>
+
+    </div>
+
+</section>
+
+<section class="container" id="products">
+
+    <h2 class="section-title">Featured Products</h2>
+
+    <div class="products">
+
+        <div class="product">
+
+            <div class="product-image">📘</div>
+
+            <div class="product-info">
+
+                <h3>Digital Marketing Guide</h3>
+
+                <p>
+                    Learn practical digital marketing strategies.
+                </p>
+
+                <div class="price">$5.00</div>
+
+                <button class="btn" onclick="buyProduct('Digital Marketing Guide')">
+                    View Product
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div class="product">
+
+            <div class="product-image">🎨</div>
+
+            <div class="product-info">
+
+                <h3>Canva Design Templates</h3>
+
+                <p>
+                    Professional templates for businesses and creators.
+                </p>
+
+                <div class="price">$3.00</div>
+
+                <button class="btn" onclick="buyProduct('Canva Design Templates')">
+                    View Product
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div class="product">
+
+            <div class="product-image">🎓</div>
+
+            <div class="product-info">
+
+                <h3>Make Money Online Course</h3>
+
+                <p>
+                    Learn legitimate online income strategies.
+                </p>
+
+                <div class="price">$10.00</div>
+
+                <button class="btn" onclick="buyProduct('Make Money Online Course')">
+                    View Product
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div class="product">
+
+            <div class="product-image">📊</div>
+
+            <div class="product-info">
+
+                <h3>Business Plan Template</h3>
+
+                <p>
+                    Create a professional business plan quickly.
+                </p>
+
+                <div class="price">$4.00</div>
+
+                <button class="btn" onclick="buyProduct('Business Plan Template')">
+                    View Product
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<section class="container" id="sell">
+
+    <div class="sell-section">
+
+        <h2>Sell Your Digital Products</h2>
+
+        <p>
+            Join JHI Digital Mart and reach customers looking for
+            ebooks, courses, templates, graphics and other digital products.
+        </p>
+
+        <button class="btn" onclick="sellerMessage()">
+            Become a Seller
+        </button>
+
+    </div>
+
+</section>
+
+
+<footer>
+
+    <h3>JHI Digital Mart</h3>
+
+    <p>Your marketplace for digital products.</p>
+
+    <p>© 2026 JHI Digital Mart. All rights reserved.</p>
+
+</footer>
+
+
+<script>
+
+function buyProduct(productName) {
+
+    alert(
+        "You selected: " +
+        productName +
+        "\n\nThe product page and payment system will be connected in the next stage."
+    );
+
+}
+
+
+function sellerMessage() {
+
+    alert(
+        "Seller registration will be connected in the next stage."
+    );
+
+}
+
+
+function searchProducts() {
+
+    const input =
+        document.getElementById("searchInput")
+        .value
+        .toLowerCase();
+
+    const products =
+        document.querySelectorAll(".product");
+
+    products.forEach(function(product) {
+
+        const name =
+            product
+            .querySelector("h3")
+            .textContent
+            .toLowerCase();
+
+        if (name.includes(input)) {
+
+            product.style.display = "block";
+
+        } else {
+
+            product.style.display = "none";
+
+        }
+
+    });
+
+}
+
+</script>
+
+</body>
+</html>
