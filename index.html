@@ -1,457 +1,1937 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>JHI Digital Mart</title>
+<title>JHI Digital Mart</title>
 
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: Arial, sans-serif;
-        }
+<style>
 
-        body {
-            background: #f5f7fb;
-            color: #222;
-        }
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    font-family:Arial,sans-serif;
+}
 
-        header {
-            background: #111827;
-            color: white;
-            padding: 18px 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 15px;
-        }
+body{
+    background:#f4f6f9;
+    color:#172033;
+}
 
-        .logo {
-            font-size: 24px;
-            font-weight: bold;
-        }
+header{
+    background:#111827;
+    color:white;
+    padding:15px 5%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:20px;
+    position:sticky;
+    top:0;
+    z-index:1000;
+}
 
-        .logo span {
-            color: #22c55e;
-        }
+.logo{
+    font-size:23px;
+    font-weight:bold;
+}
 
-        nav a {
-            color: white;
-            text-decoration: none;
-            margin-left: 15px;
-            font-size: 14px;
-        }
+.logo span{
+    color:#22c55e;
+}
 
-        .hero {
-            background: linear-gradient(135deg, #111827, #1d4ed8);
-            color: white;
-            text-align: center;
-            padding: 70px 20px;
-        }
+nav{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+}
 
-        .hero h1 {
-            font-size: 40px;
-            margin-bottom: 15px;
-        }
+nav button{
+    background:none;
+    border:none;
+    color:white;
+    cursor:pointer;
+    padding:8px;
+    font-size:14px;
+}
 
-        .hero p {
-            max-width: 650px;
-            margin: auto;
-            line-height: 1.6;
-            color: #e5e7eb;
-        }
+nav button:hover{
+    color:#22c55e;
+}
 
-        .search {
-            margin: 25px auto 0;
-            max-width: 600px;
-            display: flex;
-        }
+.page{
+    display:none;
+}
 
-        .search input {
-            flex: 1;
-            padding: 15px;
-            border: none;
-            border-radius: 8px 0 0 8px;
-            font-size: 16px;
-        }
+.page.active{
+    display:block;
+}
 
-        .search button {
-            padding: 15px 20px;
-            border: none;
-            background: #22c55e;
-            color: white;
-            border-radius: 0 8px 8px 0;
-            cursor: pointer;
-        }
+.hero{
+    background:linear-gradient(135deg,#111827,#1d4ed8);
+    color:white;
+    padding:80px 20px;
+    text-align:center;
+}
 
-        .container {
-            width: 90%;
-            max-width: 1100px;
-            margin: 40px auto;
-        }
+.hero h1{
+    font-size:42px;
+    margin-bottom:20px;
+}
 
-        .section-title {
-            text-align: center;
-            margin-bottom: 25px;
-        }
+.hero p{
+    max-width:700px;
+    margin:auto;
+    line-height:1.7;
+    font-size:18px;
+}
 
-        .categories {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-            gap: 15px;
-        }
+.search{
+    max-width:650px;
+    margin:30px auto 0;
+    display:flex;
+}
 
-        .category {
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            text-align: center;
-            box-shadow: 0 3px 12px rgba(0,0,0,0.08);
-            cursor: pointer;
-        }
+.search input{
+    flex:1;
+    padding:16px;
+    border:0;
+    font-size:16px;
+    border-radius:8px 0 0 8px;
+}
 
-        .category:hover {
-            transform: translateY(-3px);
-        }
+.search button{
+    border:0;
+    padding:16px 22px;
+    background:#22c55e;
+    color:white;
+    border-radius:0 8px 8px 0;
+    cursor:pointer;
+}
 
-        .products {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-            gap: 20px;
-        }
+.container{
+    width:90%;
+    max-width:1150px;
+    margin:40px auto;
+}
 
-        .product {
-            background: white;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 3px 15px rgba(0,0,0,0.08);
-        }
+.section-title{
+    text-align:center;
+    margin-bottom:25px;
+}
 
-        .product-image {
-            height: 150px;
-            background: #e5e7eb;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 45px;
-        }
+.categories{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
+    gap:15px;
+}
 
-        .product-info {
-            padding: 18px;
-        }
+.category{
+    background:white;
+    padding:25px 10px;
+    border-radius:12px;
+    text-align:center;
+    cursor:pointer;
+    box-shadow:0 3px 12px rgba(0,0,0,.08);
+}
 
-        .product-info h3 {
-            margin-bottom: 8px;
-        }
+.category:hover{
+    transform:translateY(-3px);
+}
 
-        .product-info p {
-            color: #666;
-            font-size: 14px;
-            margin-bottom: 12px;
-        }
+.products{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+    gap:20px;
+}
 
-        .price {
-            font-weight: bold;
-            color: #1d4ed8;
-            margin-bottom: 12px;
-        }
+.product{
+    background:white;
+    border-radius:12px;
+    overflow:hidden;
+    box-shadow:0 3px 15px rgba(0,0,0,.08);
+}
 
-        .btn {
-            display: inline-block;
-            background: #1d4ed8;
-            color: white;
-            padding: 10px 15px;
-            border-radius: 6px;
-            text-decoration: none;
-            border: none;
-            cursor: pointer;
-        }
+.product-image{
+    height:170px;
+    background:#e5e7eb;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:55px;
+}
 
-        .sell-section {
-            background: white;
-            padding: 40px 20px;
-            text-align: center;
-            border-radius: 12px;
-            margin-top: 50px;
-        }
+.product-info{
+    padding:18px;
+}
 
-        .sell-section p {
-            margin: 12px auto 20px;
-            max-width: 600px;
-            color: #666;
-        }
+.product-info h3{
+    margin-bottom:8px;
+}
 
-        footer {
-            background: #111827;
-            color: white;
-            text-align: center;
-            padding: 30px 15px;
-            margin-top: 50px;
-        }
+.product-info p{
+    color:#667085;
+    font-size:14px;
+    margin-bottom:12px;
+}
 
-        footer p {
-            margin: 8px;
-            color: #d1d5db;
-        }
+.price{
+    color:#1d4ed8;
+    font-size:18px;
+    font-weight:bold;
+    margin-bottom:12px;
+}
 
-        @media (max-width: 600px) {
-            .hero h1 {
-                font-size: 30px;
-            }
+.btn{
+    border:0;
+    background:#1d4ed8;
+    color:white;
+    padding:11px 16px;
+    border-radius:7px;
+    cursor:pointer;
+}
 
-            header {
-                justify-content: center;
-            }
+.btn.green{
+    background:#16a34a;
+}
 
-            nav a {
-                margin: 5px;
-            }
-        }
-    </style>
+.btn.red{
+    background:#dc2626;
+}
+
+.btn.gray{
+    background:#475467;
+}
+
+.card{
+    background:white;
+    padding:25px;
+    border-radius:12px;
+    box-shadow:0 3px 15px rgba(0,0,0,.07);
+    margin-bottom:20px;
+}
+
+.form{
+    max-width:500px;
+    margin:30px auto;
+}
+
+.form input,
+.form select,
+.form textarea{
+    width:100%;
+    padding:13px;
+    margin:8px 0 15px;
+    border:1px solid #d0d5dd;
+    border-radius:7px;
+}
+
+.form textarea{
+    min-height:120px;
+}
+
+.form button{
+    width:100%;
+}
+
+.dashboard{
+    display:grid;
+    grid-template-columns:220px 1fr;
+    gap:20px;
+}
+
+.sidebar{
+    background:#111827;
+    color:white;
+    padding:20px;
+    border-radius:12px;
+    height:max-content;
+}
+
+.sidebar button{
+    display:block;
+    width:100%;
+    text-align:left;
+    background:none;
+    color:white;
+    border:0;
+    padding:13px;
+    cursor:pointer;
+    border-radius:6px;
+}
+
+.sidebar button:hover{
+    background:#1f2937;
+}
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+    gap:15px;
+    margin-bottom:25px;
+}
+
+.stat{
+    background:white;
+    padding:25px;
+    border-radius:12px;
+    box-shadow:0 3px 10px rgba(0,0,0,.06);
+}
+
+.stat h2{
+    color:#1d4ed8;
+    margin-top:8px;
+}
+
+.cart-item{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:15px;
+    padding:15px 0;
+    border-bottom:1px solid #ddd;
+}
+
+.notice{
+    padding:15px;
+    background:#eff6ff;
+    border-radius:8px;
+    margin-bottom:20px;
+}
+
+footer{
+    background:#111827;
+    color:white;
+    text-align:center;
+    padding:35px 15px;
+    margin-top:60px;
+}
+
+footer p{
+    color:#cbd5e1;
+    margin-top:8px;
+}
+
+.badge{
+    background:#22c55e;
+    padding:3px 8px;
+    border-radius:20px;
+    font-size:12px;
+    color:white;
+}
+
+@media(max-width:700px){
+
+    header{
+        flex-direction:column;
+    }
+
+    nav{
+        justify-content:center;
+    }
+
+    .hero h1{
+        font-size:31px;
+    }
+
+    .dashboard{
+        grid-template-columns:1fr;
+    }
+
+    .cart-item{
+        flex-direction:column;
+        align-items:flex-start;
+    }
+
+}
+
+</style>
 </head>
 
 <body>
 
 <header>
-    <div class="logo">JHI <span>Digital Mart</span></div>
 
-    <nav>
-        <a href="#">Home</a>
-        <a href="#products">Products</a>
-        <a href="#sell">Sell</a>
-        <a href="#">Login</a>
-    </nav>
+<div class="logo">
+JHI <span>Digital Mart</span>
+</div>
+
+<nav>
+
+<button onclick="showPage('home')">Home</button>
+
+<button onclick="showPage('productsPage')">
+Products
+</button>
+
+<button onclick="showPage('categoriesPage')">
+Categories
+</button>
+
+<button onclick="showPage('affiliatePage')">
+Affiliate
+</button>
+
+<button onclick="showPage('cartPage')">
+🛒 Cart (<span id="cartCount">0</span>)
+</button>
+
+<button onclick="showPage('loginPage')">
+Login
+</button>
+
+</nav>
+
 </header>
 
-<section class="hero">
 
-    <h1>Welcome to JHI Digital Mart</h1>
+<!-- HOME -->
 
-    <p>
-        Discover, buy and sell digital products online.
-        Ebooks, courses, templates, graphics, software and more.
-    </p>
+<section id="home" class="page active">
 
-    <div class="search">
-        <input
-            type="text"
-            id="searchInput"
-            placeholder="Search digital products..."
-            onkeyup="searchProducts()"
-        >
+<div class="hero">
 
-        <button onclick="searchProducts()">Search</button>
-    </div>
+<h1>Welcome to JHI Digital Mart</h1>
 
-</section>
+<p>
+Discover, buy and sell digital products.
+Ebooks, courses, templates, graphics, software,
+business resources and much more.
+</p>
 
-<section class="container">
+<div class="search">
 
-    <h2 class="section-title">Browse Categories</h2>
+<input
+id="searchInput"
+placeholder="Search digital products..."
+onkeyup="searchProducts()">
 
-    <div class="categories">
+<button onclick="searchProducts()">
+Search
+</button>
 
-        <div class="category">📚 Ebooks</div>
-        <div class="category">🎓 Courses</div>
-        <div class="category">🎨 Graphics</div>
-        <div class="category">📄 Templates</div>
-        <div class="category">💻 Software</div>
-        <div class="category">📈 Business</div>
+</div>
 
-    </div>
-
-</section>
-
-<section class="container" id="products">
-
-    <h2 class="section-title">Featured Products</h2>
-
-    <div class="products">
-
-        <div class="product">
-
-            <div class="product-image">📘</div>
-
-            <div class="product-info">
-
-                <h3>Digital Marketing Guide</h3>
-
-                <p>
-                    Learn practical digital marketing strategies.
-                </p>
-
-                <div class="price">$5.00</div>
-
-                <button class="btn" onclick="buyProduct('Digital Marketing Guide')">
-                    View Product
-                </button>
-
-            </div>
-
-        </div>
+</div>
 
 
-        <div class="product">
+<div class="container">
 
-            <div class="product-image">🎨</div>
+<h2 class="section-title">
+Browse Categories
+</h2>
 
-            <div class="product-info">
+<div class="categories">
 
-                <h3>Canva Design Templates</h3>
+<div class="category"
+onclick="filterCategory('Ebooks')">
+📚<br>Ebooks
+</div>
 
-                <p>
-                    Professional templates for businesses and creators.
-                </p>
+<div class="category"
+onclick="filterCategory('Courses')">
+🎓<br>Courses
+</div>
 
-                <div class="price">$3.00</div>
+<div class="category"
+onclick="filterCategory('Templates')">
+📄<br>Templates
+</div>
 
-                <button class="btn" onclick="buyProduct('Canva Design Templates')">
-                    View Product
-                </button>
+<div class="category"
+onclick="filterCategory('Graphics')">
+🎨<br>Graphics
+</div>
 
-            </div>
+<div class="category"
+onclick="filterCategory('Business')">
+💼<br>Business
+</div>
 
-        </div>
+<div class="category"
+onclick="filterCategory('Software')">
+💻<br>Software
+</div>
 
+</div>
 
-        <div class="product">
-
-            <div class="product-image">🎓</div>
-
-            <div class="product-info">
-
-                <h3>Make Money Online Course</h3>
-
-                <p>
-                    Learn legitimate online income strategies.
-                </p>
-
-                <div class="price">$10.00</div>
-
-                <button class="btn" onclick="buyProduct('Make Money Online Course')">
-                    View Product
-                </button>
-
-            </div>
-
-        </div>
+</div>
 
 
-        <div class="product">
+<div class="container">
 
-            <div class="product-image">📊</div>
+<h2 class="section-title">
+Featured Products
+</h2>
 
-            <div class="product-info">
+<div id="homeProducts"
+class="products"></div>
 
-                <h3>Business Plan Template</h3>
+</div>
 
-                <p>
-                    Create a professional business plan quickly.
-                </p>
 
-                <div class="price">$4.00</div>
+<div class="container">
 
-                <button class="btn" onclick="buyProduct('Business Plan Template')">
-                    View Product
-                </button>
+<div class="card"
+style="text-align:center">
 
-            </div>
+<h2>Want to sell your digital products?</h2>
 
-        </div>
+<p style="margin:15px">
+Join JHI Digital Mart as a seller.
+</p>
 
-    </div>
+<button class="btn green"
+onclick="showPage('sellerPage')">
+Become a Seller
+</button>
+
+</div>
+
+</div>
 
 </section>
 
 
-<section class="container" id="sell">
+<!-- PRODUCTS -->
 
-    <div class="sell-section">
+<section id="productsPage" class="page">
 
-        <h2>Sell Your Digital Products</h2>
+<div class="container">
 
-        <p>
-            Join JHI Digital Mart and reach customers looking for
-            ebooks, courses, templates, graphics and other digital products.
-        </p>
+<h1 class="section-title">
+All Digital Products
+</h1>
 
-        <button class="btn" onclick="sellerMessage()">
-            Become a Seller
-        </button>
+<div id="allProducts"
+class="products"></div>
 
-    </div>
+</div>
+
+</section>
+
+
+<!-- CATEGORIES -->
+
+<section id="categoriesPage" class="page">
+
+<div class="container">
+
+<h1 class="section-title">
+Product Categories
+</h1>
+
+<div class="categories">
+
+<div class="category"
+onclick="filterCategory('Ebooks')">
+📚 Ebooks
+</div>
+
+<div class="category"
+onclick="filterCategory('Courses')">
+🎓 Courses
+</div>
+
+<div class="category"
+onclick="filterCategory('Templates')">
+📄 Templates
+</div>
+
+<div class="category"
+onclick="filterCategory('Graphics')">
+🎨 Graphics
+</div>
+
+<div class="category"
+onclick="filterCategory('Business')">
+💼 Business
+</div>
+
+<div class="category"
+onclick="filterCategory('Software')">
+💻 Software
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- PRODUCT DETAILS -->
+
+<section id="detailsPage" class="page">
+
+<div class="container">
+
+<div id="productDetails"
+class="card"></div>
+
+</div>
+
+</section>
+
+
+<!-- CART -->
+
+<section id="cartPage" class="page">
+
+<div class="container">
+
+<h1 class="section-title">
+🛒 Shopping Cart
+</h1>
+
+<div class="card">
+
+<div id="cartItems"></div>
+
+<h2 id="cartTotal">
+Total: $0.00
+</h2>
+
+<br>
+
+<button class="btn green"
+onclick="showPage('checkoutPage')">
+Proceed to Checkout
+</button>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- CHECKOUT -->
+
+<section id="checkoutPage" class="page">
+
+<div class="container">
+
+<h1 class="section-title">
+💳 Checkout
+</h1>
+
+<div class="card form">
+
+<h3>Customer Information</h3>
+
+<label>Full Name</label>
+
+<input
+id="checkoutName"
+placeholder="Your name">
+
+<label>Email</label>
+
+<input
+id="checkoutEmail"
+type="email"
+placeholder="your@email.com">
+
+<label>Payment Method</label>
+
+<select id="paymentMethod">
+
+<option>Mobile Money</option>
+
+<option>Bank Transfer</option>
+
+<option>Card Payment</option>
+
+</select>
+
+<button class="btn green"
+onclick="placeOrder()">
+
+Place Order
+
+</button>
+
+<p style="margin-top:15px;color:#667085">
+Payment integration will be connected in the next stage.
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- LOGIN -->
+
+<section id="loginPage" class="page">
+
+<div class="container">
+
+<div class="card form">
+
+<h1>🔐 Login</h1>
+
+<label>Email</label>
+
+<input
+id="loginEmail"
+type="email"
+placeholder="Email">
+
+<label>Password</label>
+
+<input
+id="loginPassword"
+type="password"
+placeholder="Password">
+
+<button class="btn"
+onclick="loginUser()">
+
+Login
+
+</button>
+
+<br><br>
+
+<p>
+Don't have an account?
+<button class="btn gray"
+onclick="showPage('registerPage')">
+Register
+</button>
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- REGISTER -->
+
+<section id="registerPage" class="page">
+
+<div class="container">
+
+<div class="card form">
+
+<h1>📝 Create Account</h1>
+
+<label>Full Name</label>
+
+<input
+id="registerName"
+placeholder="Full name">
+
+<label>Email</label>
+
+<input
+id="registerEmail"
+type="email"
+placeholder="Email">
+
+<label>Password</label>
+
+<input
+id="registerPassword"
+type="password"
+placeholder="Password">
+
+<label>Account Type</label>
+
+<select id="accountType">
+
+<option value="customer">
+Customer
+</option>
+
+<option value="seller">
+Seller
+</option>
+
+</select>
+
+<button class="btn green"
+onclick="registerUser()">
+
+Create Account
+
+</button>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- CUSTOMER -->
+
+<section id="customerPage" class="page">
+
+<div class="container">
+
+<h1>
+👤 Customer Dashboard
+</h1>
+
+<br>
+
+<div class="stats">
+
+<div class="stat">
+Orders
+<h2 id="customerOrders">0</h2>
+</div>
+
+<div class="stat">
+Cart Items
+<h2 id="customerCart">0</h2>
+</div>
+
+</div>
+
+<div class="card">
+
+<h2>My Account</h2>
+
+<p id="customerName">
+Not logged in
+</p>
+
+<br>
+
+<button class="btn"
+onclick="showPage('productsPage')">
+Continue Shopping
+</button>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- SELLER -->
+
+<section id="sellerPage" class="page">
+
+<div class="container">
+
+<h1>
+🏪 Seller Dashboard
+</h1>
+
+<br>
+
+<div class="stats">
+
+<div class="stat">
+Products
+<h2 id="sellerProducts">0</h2>
+</div>
+
+<div class="stat">
+Sales
+<h2>0</h2>
+</div>
+
+<div class="stat">
+Earnings
+<h2>$0.00</h2>
+</div>
+
+</div>
+
+
+<div class="card">
+
+<h2>➕ Add New Product</h2>
+
+<div class="form">
+
+<label>Product Name</label>
+
+<input
+id="newProductName"
+placeholder="Example: Business Ebook">
+
+<label>Description</label>
+
+<textarea
+id="newProductDescription"
+placeholder="Describe your product">
+</textarea>
+
+<label>Price (USD)</label>
+
+<input
+id="newProductPrice"
+type="number"
+placeholder="5">
+
+<label>Category</label>
+
+<select id="newProductCategory">
+
+<option>Ebooks</option>
+<option>Courses</option>
+<option>Templates</option>
+<option>Graphics</option>
+<option>Business</option>
+<option>Software</option>
+
+</select>
+
+<button class="btn green"
+onclick="addProduct()">
+
+Publish Product
+
+</button>
+
+</div>
+
+</div>
+
+
+<div class="card">
+
+<h2>My Products</h2>
+
+<div id="sellerProductList"></div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- AFFILIATE -->
+
+<section id="affiliatePage" class="page">
+
+<div class="container">
+
+<h1 class="section-title">
+🔗 Affiliate Products
+</h1>
+
+<div class="products">
+
+<div class="product">
+
+<div class="product-image">
+💻
+</div>
+
+<div class="product-info">
+
+<h3>Online Software</h3>
+
+<p>
+Recommended software and online tools.
+</p>
+
+<button class="btn"
+onclick="affiliateClick()">
+View Offer
+</button>
+
+</div>
+
+</div>
+
+
+<div class="product">
+
+<div class="product-image">
+🎓
+</div>
+
+<div class="product-info">
+
+<h3>Online Courses</h3>
+
+<p>
+Discover useful educational resources.
+</p>
+
+<button class="btn"
+onclick="affiliateClick()">
+View Offer
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ADMIN -->
+
+<section id="adminPage" class="page">
+
+<div class="container">
+
+<h1>
+⚙️ Admin Dashboard
+</h1>
+
+<br>
+
+<div class="stats">
+
+<div class="stat">
+Users
+<h2 id="adminUsers">0</h2>
+</div>
+
+<div class="stat">
+Products
+<h2 id="adminProducts">0</h2>
+</div>
+
+<div class="stat">
+Orders
+<h2>0</h2>
+</div>
+
+</div>
+
+<div class="card">
+
+<h2>Marketplace Management</h2>
+
+<p style="margin-top:10px">
+Manage users, products, orders and sellers from this
+administration area.
+</p>
+
+<br>
+
+<button class="btn red"
+onclick="clearProducts()">
+Clear Demo Products
+</button>
+
+</div>
+
+</div>
 
 </section>
 
 
 <footer>
 
-    <h3>JHI Digital Mart</h3>
+<h2>
+JHI Digital Mart
+</h2>
 
-    <p>Your marketplace for digital products.</p>
+<p>
+Your marketplace for digital products.
+</p>
 
-    <p>© 2026 JHI Digital Mart. All rights reserved.</p>
+<p>
+© 2026 JHI Digital Mart
+</p>
 
 </footer>
 
 
 <script>
 
-function buyProduct(productName) {
+/* -----------------------------
+   PRODUCT DATA
+----------------------------- */
 
-    alert(
-        "You selected: " +
-        productName +
-        "\n\nThe product page and payment system will be connected in the next stage."
-    );
+let products =
+JSON.parse(localStorage.getItem("jhiProducts")) || [
+
+{
+id:1,
+name:"Complete Digital Marketing Guide",
+description:"A practical guide to digital marketing.",
+price:5,
+category:"Ebooks",
+icon:"📘"
+},
+
+{
+id:2,
+name:"Canva Design Templates",
+description:"Professional templates for creators and businesses.",
+price:3,
+category:"Templates",
+icon:"🎨"
+},
+
+{
+id:3,
+name:"Make Money Online Course",
+description:"Learn practical online income strategies.",
+price:10,
+category:"Courses",
+icon:"🎓"
+},
+
+{
+id:4,
+name:"Business Plan Template",
+description:"Create a professional business plan.",
+price:4,
+category:"Business",
+icon:"📊"
+},
+
+{
+id:5,
+name:"Social Media Graphics Pack",
+description:"Ready-to-use graphics for social media.",
+price:6,
+category:"Graphics",
+icon:"🖼️"
+},
+
+{
+id:6,
+name:"Small Business Software",
+description:"Useful software resources for businesses.",
+price:12,
+category:"Software",
+icon:"💻"
+}
+
+];
+
+
+let cart =
+JSON.parse(localStorage.getItem("jhiCart")) || [];
+
+
+/* -----------------------------
+   SAVE DATA
+----------------------------- */
+
+function saveData(){
+
+localStorage.setItem(
+"jhiProducts",
+JSON.stringify(products)
+);
+
+localStorage.setItem(
+"jhiCart",
+JSON.stringify(cart)
+);
 
 }
 
 
-function sellerMessage() {
+/* -----------------------------
+   PAGE NAVIGATION
+----------------------------- */
 
-    alert(
-        "Seller registration will be connected in the next stage."
-    );
+function showPage(page){
+
+document
+.querySelectorAll(".page")
+.forEach(p =>
+p.classList.remove("active")
+);
+
+document
+.getElementById(page)
+.classList.add("active");
+
+window.scrollTo(0,0);
+
+renderProducts();
+renderCart();
+updateDashboard();
+
+}
+
+
+/* -----------------------------
+   PRODUCT DISPLAY
+----------------------------- */
+
+function renderProducts(){
+
+let home =
+document.getElementById("homeProducts");
+
+let all =
+document.getElementById("allProducts");
+
+if(!home || !all) return;
+
+let html = "";
+
+products.forEach(product => {
+
+html += `
+
+<div class="product">
+
+<div class="product-image">
+${product.icon || "📦"}
+</div>
+
+<div class="product-info">
+
+<h3>
+${product.name}
+</h3>
+
+<p>
+${product.description}
+</p>
+
+<div class="price">
+$${Number(product.price).toFixed(2)}
+</div>
+
+<button class="btn"
+onclick="viewProduct(${product.id})">
+View Product
+</button>
+
+</div>
+
+</div>
+
+`;
+
+});
+
+home.innerHTML = html;
+all.innerHTML = html;
 
 }
 
 
-function searchProducts() {
+/* -----------------------------
+   PRODUCT DETAILS
+----------------------------- */
 
-    const input =
-        document.getElementById("searchInput")
-        .value
-        .toLowerCase();
+function viewProduct(id){
 
-    const products =
-        document.querySelectorAll(".product");
+let product =
+products.find(p => p.id === id);
 
-    products.forEach(function(product) {
+if(!product) return;
 
-        const name =
-            product
-            .querySelector("h3")
-            .textContent
-            .toLowerCase();
+document.getElementById(
+"productDetails"
+).innerHTML = `
 
-        if (name.includes(input)) {
+<div style="text-align:center">
 
-            product.style.display = "block";
+<div style="font-size:100px">
+${product.icon || "📦"}
+</div>
 
-        } else {
+<h1>${product.name}</h1>
 
-            product.style.display = "none";
+<p style="margin:20px 0;color:#667085">
+${product.description}
+</p>
 
-        }
+<h2 style="color:#1d4ed8">
+$${Number(product.price).toFixed(2)}
+</h2>
 
-    });
+<br>
+
+<button class="btn green"
+onclick="addToCart(${product.id})">
+🛒 Add to Cart
+</button>
+
+<button class="btn gray"
+onclick="showPage('productsPage')">
+Back to Products
+</button>
+
+</div>
+
+`;
+
+showPage("detailsPage");
 
 }
+
+
+/* -----------------------------
+   CART
+----------------------------- */
+
+function addToCart(id){
+
+let product =
+products.find(p => p.id === id);
+
+if(!product) return;
+
+cart.push(product);
+
+saveData();
+
+updateCartCount();
+
+alert(product.name + " added to cart!");
+
+showPage("cartPage");
+
+}
+
+
+function renderCart(){
+
+let box =
+document.getElementById("cartItems");
+
+let total =
+document.getElementById("cartTotal");
+
+if(!box || !total) return;
+
+if(cart.length === 0){
+
+box.innerHTML =
+"<p>Your cart is empty.</p>";
+
+total.innerText =
+"Total: $0.00";
+
+updateCartCount();
+
+return;
+
+}
+
+let html = "";
+let sum = 0;
+
+cart.forEach((item,index)=>{
+
+sum += Number(item.price);
+
+html += `
+
+<div class="cart-item">
+
+<div>
+
+<strong>
+${item.name}
+</strong>
+
+<p>
+$${Number(item.price).toFixed(2)}
+</p>
+
+</div>
+
+<button class="btn red"
+onclick="removeFromCart(${index})">
+Remove
+</button>
+
+</div>
+
+`;
+
+});
+
+box.innerHTML = html;
+
+total.innerText =
+"Total: $" + sum.toFixed(2);
+
+updateCartCount();
+
+}
+
+
+function removeFromCart(index){
+
+cart.splice(index,1);
+
+saveData();
+
+renderCart();
+
+}
+
+
+function updateCartCount(){
+
+let count =
+document.getElementById("cartCount");
+
+if(count)
+count.innerText = cart.length;
+
+}
+
+
+/* -----------------------------
+   SEARCH
+----------------------------- */
+
+function searchProducts(){
+
+let input =
+document
+.getElementById("searchInput")
+.value
+.toLowerCase();
+
+let results =
+products.filter(product =>
+
+product.name
+.toLowerCase()
+.includes(input)
+
+);
+
+let box =
+document.getElementById("allProducts");
+
+box.innerHTML = "";
+
+results.forEach(product => {
+
+box.innerHTML += `
+
+<div class="product">
+
+<div class="product-image">
+${product.icon || "📦"}
+</div>
+
+<div class="product-info">
+
+<h3>${product.name}</h3>
+
+<p>${product.description}</p>
+
+<div class="price">
+$${Number(product.price).toFixed(2)}
+</div>
+
+<button class="btn"
+onclick="viewProduct(${product.id})">
+View Product
+</button>
+
+</div>
+
+</div>
+
+`;
+
+});
+
+showPage("productsPage");
+
+}
+
+
+/* -----------------------------
+   CATEGORY FILTER
+----------------------------- */
+
+function filterCategory(category){
+
+let results =
+products.filter(
+p => p.category === category
+);
+
+let box =
+document.getElementById("allProducts");
+
+box.innerHTML = "";
+
+results.forEach(product => {
+
+box.innerHTML += `
+
+<div class="product">
+
+<div class="product-image">
+${product.icon || "📦"}
+</div>
+
+<div class="product-info">
+
+<h3>${product.name}</h3>
+
+<p>${product.description}</p>
+
+<div class="price">
+$${Number(product.price).toFixed(2)}
+</div>
+
+<button class="btn"
+onclick="viewProduct(${product.id})">
+View Product
+</button>
+
+</div>
+
+</div>
+
+`;
+
+});
+
+showPage("productsPage");
+
+}
+
+
+/* -----------------------------
+   REGISTER
+----------------------------- */
+
+function registerUser(){
+
+let name =
+document.getElementById(
+"registerName"
+).value;
+
+let email =
+document.getElementById(
+"registerEmail"
+).value;
+
+let password =
+document.getElementById(
+"registerPassword"
+).value;
+
+let type =
+document.getElementById(
+"accountType"
+).value;
+
+if(!name || !email || !password){
+
+alert("Please complete all fields.");
+
+return;
+
+}
+
+let user = {
+name:name,
+email:email,
+type:type
+};
+
+localStorage.setItem(
+"jhiUser",
+JSON.stringify(user)
+);
+
+alert(
+"Account created successfully!"
+);
+
+if(type === "seller"){
+
+showPage("sellerPage");
+
+}else{
+
+showPage("customerPage");
+
+}
+
+}
+
+
+/* -----------------------------
+   LOGIN
+----------------------------- */
+
+function loginUser(){
+
+let email =
+document.getElementById(
+"loginEmail"
+).value;
+
+let password =
+document.getElementById(
+"loginPassword"
+).value;
+
+if(!email || !password){
+
+alert("Please enter your email and password.");
+
+return;
+
+}
+
+let user =
+JSON.parse(
+localStorage.getItem("jhiUser")
+);
+
+if(!user){
+
+alert(
+"No account found. Please register first."
+);
+
+return;
+
+}
+
+if(user.email !== email){
+
+alert(
+"Email does not match the registered account."
+);
+
+return;
+
+}
+
+alert("Login successful!");
+
+if(user.type === "seller"){
+
+showPage("sellerPage");
+
+}else{
+
+showPage("customerPage");
+
+}
+
+}
+
+
+/* -----------------------------
+   SELLER ADD PRODUCT
+----------------------------- */
+
+function addProduct(){
+
+let name =
+document.getElementById(
+"newProductName"
+).value;
+
+let description =
+document.getElementById(
+"newProductDescription"
+).value;
+
+let price =
+document.getElementById(
+"newProductPrice"
+).value;
+
+let category =
+document.getElementById(
+"newProductCategory"
+).value;
+
+if(!name || !description || !price){
+
+alert(
+"Please complete all product fields."
+);
+
+return;
+
+}
+
+let newProduct = {
+
+id:Date.now(),
+
+name:name,
+
+description:description,
+
+price:Number(price),
+
+category:category,
+
+icon:"📦"
+
+};
+
+products.push(newProduct);
+
+saveData();
+
+alert(
+"Product published successfully!"
+);
+
+document.getElementById(
+"newProductName"
+).value = "";
+
+document.getElementById(
+"newProductDescription"
+).value = "";
+
+document.getElementById(
+"newProductPrice"
+).value = "";
+
+updateDashboard();
+
+renderProducts();
+
+}
+
+
+/* -----------------------------
+   DASHBOARD
+----------------------------- */
+
+function updateDashboard(){
+
+let seller =
+document.getElementById(
+"sellerProducts"
+);
+
+if(seller)
+seller.innerText = products.length;
+
+
+let adminProducts =
+document.getElementById(
+"adminProducts"
+);
+
+if(adminProducts)
+adminProducts.innerText =
+products.length;
+
+
+let customerCart =
+document.getElementById(
+"customerCart"
+);
+
+if(customerCart)
+customerCart.innerText =
+cart.length;
+
+
+let users =
+JSON.parse(
+localStorage.getItem("jhiUser")
+);
+
+let adminUsers =
+document.getElementById(
+"adminUsers"
+);
+
+if(adminUsers)
+adminUsers.innerText =
+users ? 1 : 0;
+
+
+let customerName =
+document.getElementById(
+"customerName"
+);
+
+if(customerName)
+customerName.innerText =
+users
+? users.name + " (" + users.type + ")"
+: "Not logged in";
+
+
+renderSellerProducts();
+
+}
+
+
+function renderSellerProducts(){
+
+let box =
+document.getElementById(
+"sellerProductList"
+);
+
+if(!box) return;
+
+if(products.length === 0){
+
+box.innerHTML =
+"<p>No products yet.</p>";
+
+return;
+
+}
+
+box.innerHTML = "";
+
+products.forEach(product => {
+
+box.innerHTML += `
+
+<div style="
+padding:15px;
+border-bottom:1px solid #ddd;
+">
+
+<strong>
+${product.name}
+</strong>
+
+<p>
+${product.category}
+</p>
+
+<p>
+$${Number(product.price).toFixed(2)}
+</p>
+
+</div>
+
+`;
+
+});
+
+}
+
+
+/* -----------------------------
+   ORDER
+----------------------------- */
+
+function placeOrder(){
+
+if(cart.length === 0){
+
+alert(
+"Your cart is empty."
+);
+
+return;
+
+}
+
+let name =
+document.getElementById(
+"checkoutName"
+).value;
+
+let email =
+document.getElementById(
+"checkoutEmail"
+).value;
+
+if(!name || !email){
+
+alert(
+"Please enter your name and email."
+);
+
+return;
+
+}
+
+alert(
+"Order created successfully! Payment integration will be connected next."
+);
+
+cart = [];
+
+saveData();
+
+showPage("customerPage");
+
+}
+
+
+/* -----------------------------
+   AFFILIATE
+----------------------------- */
+
+function affiliateClick(){
+
+alert(
+"Affiliate link will be connected here."
+);
+
+}
+
+
+/* -----------------------------
+   ADMIN
+----------------------------- */
+
+function clearProducts(){
+
+let confirmation =
+confirm(
+"Clear all demo products?"
+);
+
+if(!confirmation) return;
+
+products = [];
+
+saveData();
+
+renderProducts();
+
+updateDashboard();
+
+alert(
+"Products cleared."
+);
+
+}
+
+
+/* -----------------------------
+   START WEBSITE
+----------------------------- */
+
+renderProducts();
+
+renderCart();
+
+updateCartCount();
+
+updateDashboard();
 
 </script>
 
